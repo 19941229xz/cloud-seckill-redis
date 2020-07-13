@@ -1,0 +1,39 @@
+
+spring:
+  application:
+    name: gateway
+
+
+
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            #这里有个allowCredentials: true这个东西是设置允许访问携带cookie的，这点一定要和前端对应！
+            allowCredentials: true
+            #可以填写多个域名用","隔开 例如："http://www.xiaolc.cn,https://spring.io"  "*"代表允许所有
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          enabled: true #开启动态路由
+
+          lower-case-service-id: true  #开启服务名小写转换
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+#开启网关日志
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: debug
+
+server:
+  port: 5050
